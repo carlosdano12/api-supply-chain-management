@@ -1,4 +1,5 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Asociado } from './associates.entity';
 
 @Entity('roles')
 export class Rol extends BaseEntity {
@@ -7,4 +8,7 @@ export class Rol extends BaseEntity {
 
   @Column({ type: 'varchar', unique: false, length: 45, nullable: false })
   nombre: string;
+
+  @ManyToMany(() => Asociado, (asociado) => asociado.roles, { nullable: false })
+  asociados: Asociado[];
 }

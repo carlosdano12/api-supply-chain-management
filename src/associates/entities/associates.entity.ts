@@ -1,4 +1,5 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Rol } from './associate_roles.entity';
 
 @Entity('asociados')
 export class Asociado extends BaseEntity {
@@ -22,4 +23,8 @@ export class Asociado extends BaseEntity {
 
   @Column({ type: 'varchar', unique: true, length: 15, nullable: false })
   telefono: string;
+
+  @ManyToMany(() => Rol, (rol) => rol.asociados, { nullable: false })
+  @JoinTable()
+  roles: Rol[];
 }

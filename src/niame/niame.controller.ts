@@ -1,15 +1,18 @@
 import { Body, Get, HttpCode, Param, Post, Put } from '@nestjs/common';
 import { Controller } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
+import { NiameDto } from './dto/niame.dto';
 import { NiameService } from './niame.service';
 
+@ApiTags('Niame')
 @Controller('niame')
 export class NiameController {
   constructor(private readonly niameService: NiameService) {}
 
   @Post()
   //@UseGuards(JwtAuthGuard)
-  async createOne(@Body('nombre') nombre: string) {
-    return await this.niameService.createOne(nombre);
+  async createOne(@Body() dto: NiameDto) {
+    return await this.niameService.createOne(dto.nombre);
   }
 
   @Get()

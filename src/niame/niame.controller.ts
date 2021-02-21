@@ -1,10 +1,18 @@
 import { Body, Get, HttpCode, Param, Post, Put } from '@nestjs/common';
 import { Controller } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiInternalServerErrorResponse,
+  ApiNotFoundResponse,
+  ApiOkResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { NiameDto } from './dto/niame.dto';
+import { Niame } from './entities/niame.entity';
 import { NiameService } from './niame.service';
 
 @ApiTags('Niame')
+@ApiBearerAuth()
 @Controller('niame')
 export class NiameController {
   constructor(private readonly niameService: NiameService) {}
@@ -21,6 +29,14 @@ export class NiameController {
     return await this.niameService.getMany();
   }
 
+  @ApiOkResponse({
+    description: 'Recupera un ñame por ID exitosamente',
+    type: Niame,
+  })
+  @ApiNotFoundResponse({ description: 'No encontro el ñame por el ID' })
+  @ApiInternalServerErrorResponse({
+    description: 'Internal server error',
+  })
   @Get(':id')
   //@UseGuards(JwtAuthGuard)
   async getOne(@Param('id') id: string) {

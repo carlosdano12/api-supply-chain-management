@@ -1,10 +1,11 @@
 import { Body, Controller, Get, HttpCode, Param, Post, Put } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import { CultivoService } from './cultivo.service';
 
 @ApiTags('Cultivo Siembra')
 @Controller('cultivo')
 export class CultivoController {
-  constructor() {}
+  constructor(private readonly _cultivoService: CultivoService) {}
 
   @Post()
   //@UseGuards(JwtAuthGuard)
@@ -12,16 +13,16 @@ export class CultivoController {
     console.log('algo');
   }
 
-  @Get()
+  @Get('/GetAllByAsociado/:asociadId')
   // @UseGuards(JwtAuthGuard)
-  async getMany() {
-    console.log('gert');
+  async getManyB(@Param('asociadId') asociadId: string) {
+    return await this._cultivoService.getManyByAsociado(asociadId);
   }
 
-  @Get(':id')
+  @Get('/GetSiembraByAsociado/:asociadId/:cultivoId')
   //@UseGuards(JwtAuthGuard)
-  async getOne(@Param('id') id: string) {
-    console.log('gert');
+  async getOne(@Param('asociadId') asociadId: string, @Param('cultivoId') cultivoId: string) {
+    console.log(`Asociado id: ${asociadId} cultivo id: ${cultivoId}`);
   }
 
   @Put(':id')

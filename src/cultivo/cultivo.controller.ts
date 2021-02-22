@@ -1,6 +1,7 @@
-import { Body, Controller, Get, HttpCode, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { CultivoService } from './cultivo.service';
+import { CultivoDto } from './dto/cultivo.dto';
 
 @ApiTags('Cultivo Siembra')
 @Controller('cultivo')
@@ -9,8 +10,8 @@ export class CultivoController {
 
   @Post()
   //@UseGuards(JwtAuthGuard)
-  async createOne() {
-    console.log('algo');
+  async createOne(@Body() dto: CultivoDto) {
+    return await this._cultivoService.createOne(dto);
   }
 
   @Get('/GetAllByAsociado/:asociadId')
@@ -22,14 +23,12 @@ export class CultivoController {
   @Get('/GetSiembraByAsociado/:asociadId/:cultivoId')
   //@UseGuards(JwtAuthGuard)
   async getOne(@Param('asociadId') asociadId: string, @Param('cultivoId') cultivoId: string) {
-    console.log(`Asociado id: ${asociadId} cultivo id: ${cultivoId}`);
+    return await this._cultivoService.getOne(asociadId, cultivoId);
   }
 
-  @Put(':id')
-  @HttpCode(204)
+  @Put('/UpdateSiembra/:asociadId/:cultivoId')
   //@UseGuards(JwtAuthGuard)
-  async editOne(@Param('id') id: string) {
-    console.log('gert');
-    return;
+  async editOne(@Param('asociadId') asociadId: string, @Param('cultivoId') cultivoId: string, @Body() dto: CultivoDto) {
+    return await this._cultivoService.editOne(asociadId, cultivoId, dto);
   }
 }

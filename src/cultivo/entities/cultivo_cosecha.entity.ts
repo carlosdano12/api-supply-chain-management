@@ -1,27 +1,32 @@
 import { CultivoSiembra } from './cultivo.entity';
 import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Asociado } from '../../associates/entities/associates.entity';
+import { ApiHideProperty, ApiProperty } from '@nestjs/swagger';
 
 @Entity('cultivo_cosecha')
 export class CultivoCosecha extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
+  @ApiHideProperty()
   @ManyToOne(() => CultivoSiembra, (cultivoSiembra) => cultivoSiembra.id_cultivo)
   cultivo: CultivoSiembra;
 
   @Column({ nullable: false })
-  cultivoId: string;
+  cultivoIdCultivo: string;
 
+  @ApiHideProperty()
   @ManyToOne(() => Asociado, (asociado) => asociado.id_asociado)
   asociado: Asociado;
 
   @Column({ nullable: false })
-  asociadoId: string;
+  asociadoIdAsociado: string;
 
+  @ApiProperty({ format: 'date' })
   @Column({ type: 'date', nullable: false })
   fecha_inicio_cosecha: Date;
 
+  @ApiProperty({ format: 'date' })
   @Column({ type: 'date', nullable: false })
   fecha_fin_cosecha: Date;
 

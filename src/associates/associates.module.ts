@@ -8,5 +8,6 @@ import { Asociado } from './entities/associates.entity';
   imports: [TypeOrmModule.forFeature([Asociado])],
   controllers: [AssociatesController],
   providers: [AssociatesService],
+  exports: [AssociatesService],
 })
 export class AssociatesModule {}

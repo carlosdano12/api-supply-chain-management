@@ -14,7 +14,7 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
     const user = await this.authService.validateUser(documento, contrasena);
 
     if (!user) {
-      throw new BadRequestException({ message: 'Email y/o contraseña no validos' });
+      throw new BadRequestException({ message: 'Documento y/o contraseña no validos' });
     }
 
     return user;

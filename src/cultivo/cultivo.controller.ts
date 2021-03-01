@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put, Request, UseGuards } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { CultivoService } from './cultivo.service';
@@ -15,21 +15,24 @@ export class CultivoController {
     return await this._cultivoService.createOne(dto);
   }
 
-  @Get('/GetAllByAsociado/:asociadId')
+  @Get('/GetAllByAsociado')
   @UseGuards(JwtAuthGuard)
-  async getManyB(@Param('asociadId') asociadId: string) {
-    return await this._cultivoService.getManyByAsociado(asociadId);
+  async getManyB(@Request() req: any) {
+    const { id } = req.user;
+    return await this._cultivoService.getManyByAsociado(id);
   }
 
-  @Get('/GetSiembraByAsociado/:asociadId/:cultivoId')
+  @Get('/GetSiembraByAsociado/:cultivoId')
   @UseGuards(JwtAuthGuard)
-  async getOne(@Param('asociadId') asociadId: string, @Param('cultivoId') cultivoId: string) {
-    return await this._cultivoService.getOne(asociadId, cultivoId);
+  async getOne(@Request() req: any, @Param('cultivoId') cultivoId: string) {
+    const { id } = req.user;
+    return await this._cultivoService.getOne(id, cultivoId);
   }
 
   @Put('/UpdateSiembra/:asociadId/:cultivoId')
   @UseGuards(JwtAuthGuard)
-  async editOne(@Param('asociadId') asociadId: string, @Param('cultivoId') cultivoId: string, @Body() dto: CultivoDto) {
-    return await this._cultivoService.editOne(asociadId, cultivoId, dto);
+  async editOne(@Request() req: any, @Param('cultivoId') cultivoId: string, @Body() dto: CultivoDto) {
+    const { id } = req.user;
+    return await this._cultivoService.editOne(id, cultivoId, dto);
   }
 }

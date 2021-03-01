@@ -4,10 +4,6 @@ import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 export class CultivoDto {
   @IsString()
   @IsNotEmpty()
-  asociadoIdAsociado: string;
-
-  @IsString()
-  @IsNotEmpty()
   nombre: string;
 
   @IsString()

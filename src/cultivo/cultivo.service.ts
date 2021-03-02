@@ -10,8 +10,12 @@ export class CultivoService {
     private readonly _cultivoSiembraRepository: CultivoSiembraRepository,
   ) {}
 
-  async createOne(dto: CultivoDto) {
-    const cultivo = this._cultivoSiembraRepository.create(dto);
+  async createOne(dto: CultivoDto, idAsociado: string) {
+    const cultivo = this._cultivoSiembraRepository.create({
+      ...dto,
+      asociadoIdAsociado: idAsociado,
+      niameIdNiame: dto.id_niame,
+    });
     return await this._cultivoSiembraRepository.save(cultivo);
   }
 
@@ -33,7 +37,7 @@ export class CultivoService {
       throw new NotFoundException({ message: 'Cultivo no encontrado' });
     }
     cultivoDB.nombre = dto.nombre;
-    cultivoDB.niameIdNiame = dto.niameIdNiame;
+    cultivoDB.niameIdNiame = dto.id_niame;
     cultivoDB.fecha_inicio_siembra = dto.fecha_inicio_siembra;
     cultivoDB.fecha_fin_siembra = dto.fecha_fin_siembra;
     cultivoDB.hectareas_sembradas = dto.hectareas_sembradas;

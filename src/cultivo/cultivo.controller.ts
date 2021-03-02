@@ -11,8 +11,9 @@ export class CultivoController {
 
   @Post()
   @UseGuards(JwtAuthGuard)
-  async createOne(@Body() dto: CultivoDto) {
-    return await this._cultivoService.createOne(dto);
+  async createOne(@Request() req: any, @Body() dto: CultivoDto) {
+    const { id } = req.user;
+    return await this._cultivoService.createOne(dto, id);
   }
 
   @Get('/GetAllByAsociado')

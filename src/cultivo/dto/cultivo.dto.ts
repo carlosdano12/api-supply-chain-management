@@ -8,7 +8,7 @@ export class CultivoDto {
 
   @IsString()
   @IsNotEmpty()
-  niameIdNiame: string;
+  id_niame: string;
 
   @ApiProperty({ format: 'date' })
   @IsString()

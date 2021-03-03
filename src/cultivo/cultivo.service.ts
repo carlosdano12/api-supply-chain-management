@@ -14,7 +14,7 @@ export class CultivoService {
     const cultivo = this._cultivoSiembraRepository.create({
       ...dto,
       asociadoIdAsociado: idAsociado,
-      niameIdNiame: dto.id_niame,
+      niameIdNiame: dto.niameIdNiame,
     });
     return await this._cultivoSiembraRepository.save(cultivo);
   }
@@ -37,7 +37,7 @@ export class CultivoService {
       throw new NotFoundException({ message: 'Cultivo no encontrado' });
     }
     cultivoDB.nombre = dto.nombre;
-    cultivoDB.niameIdNiame = dto.id_niame;
+    cultivoDB.niameIdNiame = dto.niameIdNiame;
     cultivoDB.fecha_inicio_siembra = dto.fecha_inicio_siembra;
     cultivoDB.fecha_fin_siembra = dto.fecha_fin_siembra;
     cultivoDB.hectareas_sembradas = dto.hectareas_sembradas;

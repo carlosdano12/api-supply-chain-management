@@ -9,6 +9,7 @@ import { ConfigModule } from '@nestjs/config';
 import { NiameModule } from './niame/niame.module';
 import { CultivoModule } from './cultivo/cultivo.module';
 import { AuthModule } from './auth/auth.module';
+import { InsumosModule } from './insumos/insumos.module';
 
 const environment = process.env.NODE_ENV || 'development';
 
@@ -18,7 +19,7 @@ const configRoot: ConfigModuleOptions = {
 };
 
 @Module({
-  imports: [ConfigModule.forRoot(configRoot), AssociatesModule, DatabaseModule, NiameModule, CultivoModule, AuthModule],
+  imports: [ConfigModule.forRoot(configRoot), AssociatesModule, DatabaseModule, NiameModule, CultivoModule, AuthModule, InsumosModule],
   controllers: [AppController],
   providers: [AppService],
 })

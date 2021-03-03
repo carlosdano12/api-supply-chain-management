@@ -30,7 +30,7 @@ export class CultivoController {
     return await this._cultivoService.getOne(id, cultivoId);
   }
 
-  @Put('/UpdateSiembra/:asociadId/:cultivoId')
+  @Put('/UpdateSiembra/:cultivoId')
   @UseGuards(JwtAuthGuard)
   async editOne(@Request() req: any, @Param('cultivoId') cultivoId: string, @Body() dto: CultivoDto) {
     const { id } = req.user;

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put, Request, UseGuards } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { CultivoCosechaService } from './cultivo_cosecha.service';
@@ -11,7 +11,9 @@ export class CultivoCosechaController {
 
   @Post()
   @UseGuards(JwtAuthGuard)
-  async createOne(@Body() dto: CultivoCosechaDto) {
+  async createOne(@Request() req: any, @Body() dto: CultivoCosechaDto) {
+    const { id } = req.user;
+    dto.asociadoIdAsociado = id;
     return await this._cultivoCosechaService.createOne(dto);
   }
 

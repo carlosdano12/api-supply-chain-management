@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class CultivoCosechaDto {
   @IsString()
@@ -7,7 +7,7 @@ export class CultivoCosechaDto {
   cultivoIdCultivo: string;
 
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   asociadoIdAsociado: string;
 
   @ApiProperty({ format: 'date' })

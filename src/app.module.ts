@@ -10,6 +10,7 @@ import { NiameModule } from './niame/niame.module';
 import { CultivoModule } from './cultivo/cultivo.module';
 import { AuthModule } from './auth/auth.module';
 import { InsumosModule } from './insumos/insumos.module';
+import { DiaControlModule } from './dia-control/dia-control.module';
 
 const environment = process.env.NODE_ENV || 'development';
 
@@ -19,7 +20,16 @@ const configRoot: ConfigModuleOptions = {
 };
 
 @Module({
-  imports: [ConfigModule.forRoot(configRoot), AssociatesModule, DatabaseModule, NiameModule, CultivoModule, AuthModule, InsumosModule],
+  imports: [
+    ConfigModule.forRoot(configRoot),
+    AssociatesModule,
+    DatabaseModule,
+    NiameModule,
+    CultivoModule,
+    AuthModule,
+    InsumosModule,
+    DiaControlModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

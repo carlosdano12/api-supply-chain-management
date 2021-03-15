@@ -1,4 +1,4 @@
-import { BaseEntity, Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { ApiHideProperty, ApiProperty } from '@nestjs/swagger';
 import { CultivoSiembra } from '../../cultivo/entities/cultivo.entity';
 import { DiaControlInsumo } from './dia_control_insumo.entity';
@@ -17,11 +17,12 @@ export class DiaControl extends BaseEntity {
 
   @ApiHideProperty()
   @ManyToOne(() => CultivoSiembra, (cultivoSiembra) => cultivoSiembra.id_cultivo)
+  @JoinColumn([{ name: 'cultivoIdCultivo', referencedColumnName: 'id_cultivo' }])
   cultivo: CultivoSiembra;
 
   @Column({ nullable: false })
   cultivoIdCultivo: string;
 
-  @OneToMany(() => DiaControlInsumo, (diaControlInsumo) => diaControlInsumo.id)
+  @OneToMany(() => DiaControlInsumo, (diaControlInsumo) => diaControlInsumo.diaControl)
   diasControlInsumos: DiaControlInsumo[];
 }

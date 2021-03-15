@@ -1,4 +1,4 @@
-import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { ApiHideProperty } from '@nestjs/swagger';
 import { DiaControl } from './dia_control.entity';
 import { Insumo } from '../../insumos/entities/insumo.entity';
@@ -10,6 +10,7 @@ export class DiaControlInsumo extends BaseEntity {
 
   @ApiHideProperty()
   @ManyToOne(() => DiaControl, (diaControl) => diaControl.id)
+  @JoinColumn([{ name: 'diaControlId', referencedColumnName: 'id' }])
   diaControl: DiaControl;
 
   @Column({ nullable: false })

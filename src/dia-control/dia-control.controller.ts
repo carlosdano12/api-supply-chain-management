@@ -18,7 +18,7 @@ export class DiaControlController {
 
   @Get(':cultivoId')
   @UseGuards(JwtAuthGuard)
-  async getOne(@Param('cultivoId') cultivoId: string) {
+  async getMany(@Param('cultivoId') cultivoId: string) {
     return await this._diaControlService.getMany(cultivoId);
   }
 }

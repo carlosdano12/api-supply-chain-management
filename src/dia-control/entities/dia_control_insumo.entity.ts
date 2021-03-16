@@ -9,7 +9,7 @@ export class DiaControlInsumo extends BaseEntity {
   id: string;
 
   @ApiHideProperty()
-  @ManyToOne(() => DiaControl, (diaControl) => diaControl.id)
+  @ManyToOne(() => DiaControl, (diaControl) => diaControl.id, {})
   @JoinColumn([{ name: 'diaControlId', referencedColumnName: 'id' }])
   diaControl: DiaControl;
 
@@ -17,7 +17,7 @@ export class DiaControlInsumo extends BaseEntity {
   diaControlId: string;
 
   @ApiHideProperty()
-  @ManyToOne(() => Insumo, (insumo) => insumo.id)
+  @ManyToOne(() => Insumo, (insumo) => insumo.id, { eager: true })
   insumo: Insumo;
 
   @Column({ nullable: false })

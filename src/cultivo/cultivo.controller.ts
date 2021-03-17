@@ -1,10 +1,11 @@
 import { Body, Controller, Get, Param, Post, Put, Request, UseGuards } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { CultivoService } from './cultivo.service';
 import { CultivoDto } from './dto/cultivo.dto';
 
 @ApiTags('Cultivo Siembra')
+@ApiBearerAuth()
 @Controller('cultivo')
 export class CultivoController {
   constructor(private readonly _cultivoService: CultivoService) {}

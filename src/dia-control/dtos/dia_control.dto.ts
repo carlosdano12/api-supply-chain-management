@@ -5,7 +5,7 @@ export class IDiaControlInsumo {
   insumoId: string;
   cantidad: number;
 }
-export class IDiaControl {
+export class DiaControlDto {
   @ApiProperty({ format: 'date' })
   @IsString()
   fechaControl: Date;

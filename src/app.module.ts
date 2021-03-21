@@ -11,6 +11,8 @@ import { CultivoModule } from './cultivo/cultivo.module';
 import { AuthModule } from './auth/auth.module';
 import { InsumosModule } from './insumos/insumos.module';
 import { DiaControlModule } from './dia-control/dia-control.module';
+import { CompraModule } from './compra/compra.module';
+import { TransporteModule } from './transporte/transporte.module';
 
 const environment = process.env.NODE_ENV || 'development';
 
@@ -29,6 +31,8 @@ const configRoot: ConfigModuleOptions = {
     AuthModule,
     InsumosModule,
     DiaControlModule,
+    CompraModule,
+    TransporteModule,
   ],
   controllers: [AppController],
   providers: [AppService],

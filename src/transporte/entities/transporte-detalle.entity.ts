@@ -1,7 +1,7 @@
 import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { ApiHideProperty } from '@nestjs/swagger';
 import { Transporte } from './transporte.entity';
-import { Niame } from 'src/niame/entities/niame.entity';
+import { Niame } from '../../niame/entities/niame.entity';
 
 @Entity('transporte_detalle')
 export class TransporteDetalle extends BaseEntity {

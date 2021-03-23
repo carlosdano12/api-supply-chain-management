@@ -13,6 +13,7 @@ import { InsumosModule } from './insumos/insumos.module';
 import { DiaControlModule } from './dia-control/dia-control.module';
 import { CompraModule } from './compra/compra.module';
 import { TransporteModule } from './transporte/transporte.module';
+import { ReportesModule } from './reportes/reportes.module';
 
 const environment = process.env.NODE_ENV || 'development';
 
@@ -33,6 +34,7 @@ const configRoot: ConfigModuleOptions = {
     DiaControlModule,
     CompraModule,
     TransporteModule,
+    ReportesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

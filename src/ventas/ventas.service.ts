@@ -27,7 +27,7 @@ export class VentasService {
         const niame = new VentaDetalle();
 
         niame.ventaEncabezadoId = ventaDB.id;
-        niame.niameId = niameDto.niameId;
+        niame.niameIdNiame = niameDto.niameId;
         niame.cantidad = niameDto.cantidad;
 
         detalles.push(niame);
@@ -65,7 +65,7 @@ export class VentasService {
         const niame = new VentaDetalle();
 
         niame.ventaEncabezadoId = ventaDB.id;
-        niame.niameId = niameDto.niameId;
+        niame.niameIdNiame = niameDto.niameId;
         niame.cantidad = niameDto.cantidad;
 
         detalles.push(niame);
@@ -82,9 +82,8 @@ export class VentasService {
     }
   }
 
-  async getMany(asociadoId: string) {
+  async getMany() {
     const ventas = await this._ventaEncabezadoRepository.find({
-      where: { asociadoIdAsociado: asociadoId },
       relations: ['ventaDetalles'],
     });
 

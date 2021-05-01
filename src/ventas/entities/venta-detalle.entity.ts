@@ -21,7 +21,7 @@ export class VentaDetalle extends BaseEntity {
   niame: Niame;
 
   @Column({ nullable: false })
-  insumoId: string;
+  niameIdNiame: string;
 
   @Column({ type: 'decimal', precision: 13, scale: 2, nullable: true })
   cantidad: number;

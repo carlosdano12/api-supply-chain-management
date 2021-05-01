@@ -15,7 +15,7 @@ export class Transporte extends BaseEntity {
   @Column({ nullable: false })
   asociadoIdAsociado: string;
 
-  @Column({ type: 'varchar', unique: false, length: 45, nullable: false })
+  @Column({ type: 'varchar', unique: false, length: 45, nullable: true })
   nota: string;
 
   @ApiProperty({ format: 'date' })

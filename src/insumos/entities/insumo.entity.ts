@@ -7,4 +7,7 @@ export class Insumo extends BaseEntity {
 
   @Column({ type: 'varchar', unique: false, length: 45, nullable: false })
   nombre: string;
+
+  @Column({ type: 'timestamp', nullable: true })
+  disableAt: Date;
 }

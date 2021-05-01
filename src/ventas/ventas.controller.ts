@@ -16,9 +16,8 @@ export class VentasController {
 
   @Get()
   @UseGuards(JwtAuthGuard)
-  async getMany(@Request() req: any) {
-    const { id } = req.user;
-    return await this._ventasService.getMany(id);
+  async getMany() {
+    return await this._ventasService.getMany();
   }
 
   @Put(':ventaId')

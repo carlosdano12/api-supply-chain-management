@@ -82,9 +82,8 @@ export class VentasService {
     }
   }
 
-  async getMany(asociadoId: string) {
+  async getMany() {
     const ventas = await this._ventaEncabezadoRepository.find({
-      where: { asociadoIdAsociado: asociadoId },
       relations: ['ventaDetalles'],
     });
 

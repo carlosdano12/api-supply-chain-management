@@ -27,4 +27,7 @@ export class VentaEncabezado extends BaseEntity {
 
   @OneToMany(() => VentaDetalle, (ventaDetalle) => ventaDetalle.ventaEncabezado)
   ventaDetalles: VentaDetalle[];
+
+  @Column({ type: 'float', nullable: false })
+  total: number;
 }

@@ -29,4 +29,14 @@ export class TransporteController {
   async update(@Param('transporteId') transporteId: string, @Body() dto: TransporteDto) {
     return await this._transporteService.editOne(transporteId, dto);
   }
+
+  @Get('solitudes')
+  async getSolicitudes() {
+    return await this._transporteService.getSolicitudes();
+  }
+
+  @Put(':id/toggle-status')
+  async toggleStatus(@Param('id') id: string) {
+    return await this._transporteService.toggleSolitud(id);
+  }
 }

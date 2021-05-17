@@ -1,4 +1,4 @@
-import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { getConnection } from 'typeorm';
 import { TransporteDto } from './dto/transporte.dto';
@@ -89,5 +89,15 @@ export class TransporteService {
     });
 
     return transportes;
+  }
+
+  async getSolicitudes() {
+    return await this._transporteRepository.getSolicitudes();
+  }
+
+  async toggleSolitud(id: string) {
+    const transporte = await this._transporteRepository.findOne(id);
+    if (!transporte) throw new BadRequestException('No encontrado el transporte');
+    return await this._transporteRepository.update(id, { estado: !transporte.estado, fechaEntrega: new Date() });
   }
 }

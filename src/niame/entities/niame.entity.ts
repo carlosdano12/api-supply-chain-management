@@ -7,4 +7,10 @@ export class Niame extends BaseEntity {
 
   @Column({ type: 'varchar', unique: false, length: 45, nullable: false })
   nombre: string;
+
+  @Column({ type: 'float', nullable: false, default: 0.0 })
+  cantidad: number;
+
+  @Column({ type: 'float', nullable: false })
+  precio: number;
 }

@@ -9,6 +9,7 @@ import {
 } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { NiameDto } from './dto/niame.dto';
+import { UpdateNiameDto } from './dto/update-name.dto';
 import { Niame } from './entities/niame.entity';
 import { NiameService } from './niame.service';
 
@@ -21,7 +22,7 @@ export class NiameController {
   @Post()
   @UseGuards(JwtAuthGuard)
   async createOne(@Body() dto: NiameDto) {
-    return await this.niameService.createOne(dto.nombre);
+    return await this.niameService.createOne(dto);
   }
 
   @Get()
@@ -47,8 +48,8 @@ export class NiameController {
   @Put(':id')
   @HttpCode(204)
   @UseGuards(JwtAuthGuard)
-  async editOne(@Param('id') id: string, @Body('nombre') nombre: string) {
-    await this.niameService.editOne(id, nombre);
+  async editOne(@Param('id') id: string, @Body() dto: UpdateNiameDto) {
+    await this.niameService.editOne(id, dto);
     return;
   }
 }

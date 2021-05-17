@@ -1,5 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { NiameDto } from './dto/niame.dto';
+import { UpdateNiameDto } from './dto/update-name.dto';
 import { NiameRepository } from './niame.repository';
 
 @Injectable()
@@ -17,18 +19,22 @@ export class NiameService {
     return await this._niameRepository.find();
   }
 
-  async createOne(nombre: string) {
-    const niame = this._niameRepository.create({ nombre });
+  async createOne(dto: NiameDto) {
+    const niame = this._niameRepository.create(dto);
     return await this._niameRepository.save(niame);
   }
 
-  async editOne(id_niame: string, nombre: string) {
+  async editOne(id_niame: string, dto: UpdateNiameDto) {
     const niameDB = await this._niameRepository.findOne({ where: { id_niame } });
     if (!niameDB) {
       throw new NotFoundException({ message: 'Niame no encontrado' });
     }
-    niameDB.nombre = nombre;
-    await this._niameRepository.update({ id_niame }, niameDB);
+
+    niameDB.nombre = dto?.nombre ? dto.nombre : niameDB.nombre;
+    niameDB.precio = dto?.precio ? dto.precio : niameDB.precio;
+    niameDB.cantidad = dto?.cantidad ? dto.cantidad : niameDB.cantidad;
+
+    await this._niameRepository.update(id_niame, niameDB);
     return await this._niameRepository.findOne({ id_niame });
   }
 }

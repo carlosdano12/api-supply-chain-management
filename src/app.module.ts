@@ -15,6 +15,7 @@ import { CompraModule } from './compra/compra.module';
 import { TransporteModule } from './transporte/transporte.module';
 import { ReportesModule } from './reportes/reportes.module';
 import { VentasModule } from './ventas/ventas.module';
+import { ClientesModule } from './clientes/clientes.module';
 
 const environment = process.env.NODE_ENV || 'development';
 
@@ -37,6 +38,7 @@ const configRoot: ConfigModuleOptions = {
     TransporteModule,
     ReportesModule,
     VentasModule,
+    ClientesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

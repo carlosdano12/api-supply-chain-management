@@ -1,5 +1,6 @@
 import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Niame } from 'src/niame/entities/niame.entity';
 import { getConnection } from 'typeorm';
 import { VentaEncabezadoRepository } from './compra.repository';
 import { VentaDto } from './dto/venta.dto';
@@ -25,6 +26,11 @@ export class VentasService {
       for (let index = 0; index < dto.ventaDetalles.length; index++) {
         const niameDto = dto.ventaDetalles[index];
         const niame = new VentaDetalle();
+        const niameSaved = await queryRunner.manager.findOne(Niame, niameDto.niameId);
+
+        await queryRunner.manager.update(Niame, niameDto.niameId, {
+          cantidad: niameSaved.cantidad - niameDto.cantidad,
+        });
 
         niame.ventaEncabezadoId = ventaDB.id;
         niame.niameIdNiame = niameDto.niameId;

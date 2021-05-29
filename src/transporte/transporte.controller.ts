@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Param, Post, Put, Request, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { RecibirNiame } from './dto/recibir-niame.dto';
 import { TransporteDto } from './dto/transporte.dto';
 import { TransporteService } from './transporte.service';
 
@@ -38,5 +39,10 @@ export class TransporteController {
   @Put(':id/toggle-status')
   async toggleStatus(@Param('id') id: string) {
     return await this._transporteService.toggleSolitud(id);
+  }
+
+  @Put('recibir')
+  async recibirNiame(@Body() recibirNiame: RecibirNiame[]) {
+    return await this._transporteService.recibirNiame(recibirNiame);
   }
 }

@@ -26,6 +26,9 @@ export class TransporteDetalle extends BaseEntity {
   @Column({ type: 'decimal', precision: 13, scale: 2, nullable: true })
   cantidad: number;
 
+  @Column({ type: 'decimal', precision: 13, scale: 2, nullable: true })
+  recibido: number;
+
   @Column({ type: 'boolean', nullable: false, default: false })
   estado: boolean;
 }

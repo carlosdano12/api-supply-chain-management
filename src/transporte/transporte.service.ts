@@ -1,8 +1,12 @@
 import { BadRequestException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Niame } from 'src/niame/entities/niame.entity';
 import { getConnection } from 'typeorm';
+import { RecibirNiame } from './dto/recibir-niame.dto';
 import { TransporteDto } from './dto/transporte.dto';
 import { TransporteDetalle } from './entities/transporte-detalle.entity';
+import { Transporte } from './entities/transporte.entity';
+import { TrasporteDetalleRepository } from './transporte-detalle.repository';
 import { TrasporteRepository } from './transporte.repository';
 
 @Injectable()
@@ -10,7 +14,13 @@ export class TransporteService {
   constructor(
     @InjectRepository(TrasporteRepository)
     private readonly _transporteRepository: TrasporteRepository,
+
+    @InjectRepository(TrasporteDetalleRepository)
+    private readonly _transporteDetalleRepository: TrasporteDetalleRepository,
   ) {}
+
+  //TODO: enpoint para guardar los ñames entrantes en la tabla "transporte_detalle" y actualizar la cantidad de ñame en la tabla "niame"
+
   async createOne(asocaidoId: string, dto: TransporteDto) {
     const connection = getConnection();
     const queryRunner = connection.createQueryRunner();
@@ -99,5 +109,23 @@ export class TransporteService {
     const transporte = await this._transporteRepository.findOne(id);
     if (!transporte) throw new BadRequestException('No encontrado el transporte');
     return await this._transporteRepository.update(id, { estado: !transporte.estado, fechaEntrega: new Date() });
+  }
+
+  async recibirNiame(recibirNiame: RecibirNiame[]) {
+    await getConnection().transaction(async (transaction) => {
+      const transportId = (await transaction.findOne(TransporteDetalle, recibirNiame[0].idDetalle))?.transporteId;
+
+      await transaction.update(Transporte, transportId, { estado: false });
+      await Promise.all(
+        recibirNiame.map(async (dato) => {
+          await transaction.update(TransporteDetalle, dato.idDetalle, {
+            cantidad: dato.cantidad,
+          });
+
+          const niame = await transaction.findOne(Niame, dato.idNiame);
+          await transaction.update(Niame, niame.id_niame, { cantidad: niame.cantidad + dato.cantidad });
+        }),
+      );
+    });
   }
 }

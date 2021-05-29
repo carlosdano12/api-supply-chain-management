@@ -25,6 +25,11 @@ export class TransporteController {
     return await this._transporteService.getMany(id);
   }
 
+  @Put('recibir')
+  async recibirNiame(@Body() recibirNiame: RecibirNiame[]) {
+    return await this._transporteService.recibirNiame(recibirNiame);
+  }
+
   @Put(':transporteId')
   @UseGuards(JwtAuthGuard)
   async update(@Param('transporteId') transporteId: string, @Body() dto: TransporteDto) {
@@ -39,10 +44,5 @@ export class TransporteController {
   @Put(':id/toggle-status')
   async toggleStatus(@Param('id') id: string) {
     return await this._transporteService.toggleSolitud(id);
-  }
-
-  @Put('recibir')
-  async recibirNiame(@Body() recibirNiame: RecibirNiame[]) {
-    return await this._transporteService.recibirNiame(recibirNiame);
   }
 }

@@ -90,4 +90,13 @@ export class CompraService {
 
     return compras;
   }
+
+  async getManySolicitudes() {
+    const compras = await this._compraEncabezadoRepository.find({
+      where: { estado: 0 },
+      relations: ['compraDetalles', 'asociado'],
+    });
+
+    return compras;
+  }
 }

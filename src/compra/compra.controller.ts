@@ -24,6 +24,12 @@ export class CompraController {
     return await this._compraService.getMany(id);
   }
 
+  @Get('solicitudes')
+  @UseGuards(JwtAuthGuard)
+  async getManySolicitudes() {
+    return await this._compraService.getManySolicitudes();
+  }
+
   @Put(':compraId')
   @UseGuards(JwtAuthGuard)
   async update(@Param('compraId') compraId: string, @Body() dto: CompraDto) {

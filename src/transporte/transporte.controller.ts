@@ -31,7 +31,7 @@ export class TransporteController {
     return await this._transporteService.editOne(transporteId, dto);
   }
 
-  @Get('solitudes')
+  @Get('solicitudes')
   async getSolicitudes() {
     return await this._transporteService.getSolicitudes();
   }
@@ -41,7 +41,7 @@ export class TransporteController {
     return await this._transporteService.toggleSolitud(id);
   }
 
-  @Put('recibir')
+  @Put('recibir/confirmar')
   async recibirNiame(@Body() recibirNiame: RecibirNiame[]) {
     return await this._transporteService.recibirNiame(recibirNiame);
   }

@@ -2,11 +2,11 @@ import { IsNumberString, IsString } from 'class-validator';
 
 export class RecibirNiame {
   @IsString()
-  idDetalle: string;
+  id: string;
 
   @IsString()
-  idNiame: string;
+  niameIdNiame: string;
 
   @IsNumberString()
-  cantidad: number;
+  recibido: number;
 }

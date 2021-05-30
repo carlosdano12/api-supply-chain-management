@@ -113,10 +113,12 @@ export class TransporteService {
   }
 
   async recibirNiame(recibirNiame: RecibirNiame[]) {
+    console.log(recibirNiame[0]);
+
     await getConnection().transaction(async (transaction) => {
       const transportId = (await transaction.findOne(TransporteDetalle, recibirNiame[0].id))?.transporteId;
 
-      await transaction.update(Transporte, transportId, { estado: false });
+      await transaction.update(Transporte, transportId, { estado: true });
       await Promise.all(
         recibirNiame.map(async (dato) => {
           await transaction.update(TransporteDetalle, dato.id, {
@@ -124,7 +126,8 @@ export class TransporteService {
           });
 
           const niame = await transaction.findOne(Niame, dato.niameIdNiame);
-          await transaction.update(Niame, niame.id_niame, { cantidad: niame.cantidad + dato.recibido });
+          const suma = Number(niame.cantidad) + Number(dato.recibido);
+          await transaction.update(Niame, niame.id_niame, { cantidad: suma });
         }),
       );
     });

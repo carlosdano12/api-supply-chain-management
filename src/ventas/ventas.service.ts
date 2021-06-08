@@ -19,7 +19,11 @@ export class VentasService {
 
     await queryRunner.startTransaction();
     try {
-      const venta = this._ventaEncabezadoRepository.create({ asociadoIdAsociado: asocaidoId, nota: dto.nota });
+      const venta = this._ventaEncabezadoRepository.create({
+        asociadoIdAsociado: asocaidoId,
+        nota: dto.nota,
+        total: dto.total,
+      });
 
       const ventaDB = await queryRunner.manager.save(venta);
       const detalles: VentaDetalle[] = [];
@@ -35,6 +39,8 @@ export class VentasService {
         niame.ventaEncabezadoId = ventaDB.id;
         niame.niameIdNiame = niameDto.niameId;
         niame.cantidad = niameDto.cantidad;
+        niame.precio = niameDto.precio;
+        niame.total = niameDto.total;
 
         detalles.push(niame);
       }

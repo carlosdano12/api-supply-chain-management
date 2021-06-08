@@ -10,7 +10,7 @@ export class VentasController {
   constructor(private readonly _ventasService: VentasService) {}
 
   @Post()
-  //@UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   async create(@Request() req: any, @Body() dto: VentaDto) {
     const { id } = req.user;
     return await this._ventasService.createOne(id, dto);

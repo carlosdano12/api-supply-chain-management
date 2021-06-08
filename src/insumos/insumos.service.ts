@@ -13,7 +13,6 @@ export class InsumosService {
   ) {}
 
   async create(dto: CreateInsumoDto) {
-    dto.disableAt = null;
     return await this._insumoRepository.save(dto);
   }
 
@@ -27,5 +26,9 @@ export class InsumosService {
 
   async getMany() {
     return await this._insumoRepository.find();
+  }
+
+  async getOne(id: string) {
+    return await this._insumoRepository.findOne({ where: { id: id } });
   }
 }

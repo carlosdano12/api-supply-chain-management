@@ -26,6 +26,12 @@ export class VentaDetalle extends BaseEntity {
   @Column({ type: 'decimal', precision: 13, scale: 2, nullable: true })
   cantidad: number;
 
+  @Column({ type: 'decimal', precision: 13, scale: 2, nullable: true })
+  precio: number;
+
+  @Column({ type: 'decimal', precision: 13, scale: 2, nullable: true })
+  total: number;
+
   @Column({ type: 'boolean', nullable: false, default: false })
   estado: boolean;
 }

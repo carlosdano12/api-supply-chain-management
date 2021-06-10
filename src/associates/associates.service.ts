@@ -20,7 +20,7 @@ export class AssociatesService {
   }
 
   async createOne(dto: CreateAsociadoDto) {
-    const asociado = this._asociadoRepository.create(dto);
+    const asociado = this._asociadoRepository.create({ ...dto });
     return await this._asociadoRepository.save(asociado);
   }
 

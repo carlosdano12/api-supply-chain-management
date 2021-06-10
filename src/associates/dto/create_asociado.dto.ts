@@ -1,17 +1,18 @@
-import { Rol } from '../entities/associate_roles.entity';
+import { IsString } from 'class-validator';
 
 export class CreateAsociadoDto {
+  @IsString()
   nombre: string;
 
+  @IsString()
   apellido: string;
 
-  id_documento: number;
-
+  @IsString()
   documento: string;
 
+  @IsString()
   contrasena: string;
 
+  @IsString()
   telefono: string;
-
-  roles: Rol[];
 }

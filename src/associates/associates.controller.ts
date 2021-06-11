@@ -4,6 +4,7 @@ import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { AssociatesService } from './associates.service';
 import { AssociatesRequestService } from './associate_request.service';
 import { CreateAsociadoDto } from './dto/create_asociado.dto';
+import { CreateAsociadoRequestDto } from './dto/create_asociado_request.dto';
 
 @ApiTags('Asociados')
 @ApiBearerAuth()
@@ -42,5 +43,11 @@ export class AssociatesController {
   @UseGuards(JwtAuthGuard)
   async createOne(@Body() dto: CreateAsociadoDto) {
     return await this._associateService.createOne(dto);
+  }
+
+  @Post('request')
+  @UseGuards(JwtAuthGuard)
+  async createOneRequest(@Body() dto: CreateAsociadoRequestDto) {
+    return await this._associateRequestService.createOne(dto);
   }
 }

@@ -1,6 +1,6 @@
 import { IsString } from 'class-validator';
 
-export class UpdateAsociadoDto {
+export class UpdateAsociadoRequestDto {
   @IsString()
   nombre: string;
 
@@ -11,7 +11,7 @@ export class UpdateAsociadoDto {
   documento: string;
 
   @IsString()
-  contrasena: string;
+  descripcion: string;
 
   @IsString()
   telefono: string;

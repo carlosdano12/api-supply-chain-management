@@ -31,10 +31,9 @@ export class AssociatesService {
     }
     asociadoDB.nombre = dto.nombre;
     asociadoDB.apellido = dto.apellido;
-    asociadoDB.id_documento = dto.id_documento;
     asociadoDB.documento = dto.documento;
     asociadoDB.telefono = dto.telefono;
-    asociadoDB.roles = dto.roles;
+    if (dto.contrasena) asociadoDB.contrasena = dto.contrasena;
     await this._asociadoRepository.update({ id_asociado }, asociadoDB);
     return await this._asociadoRepository.findOne({ id_asociado });
   }

@@ -26,6 +26,9 @@ export class CompraEncabezado extends BaseEntity {
   @Column({ type: 'date', nullable: false, default: () => 'now()' })
   fechaCompra: Date;
 
+  @Column({ type: 'decimal', precision: 13, scale: 2, nullable: true })
+  total: number;
+
   @Column({ type: 'boolean', nullable: false, default: false })
   estado: boolean;
 

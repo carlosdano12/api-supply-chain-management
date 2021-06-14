@@ -3,6 +3,7 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { CompraService } from './compra.service';
 import { CompraDto } from './dto/compra.dto';
+import { CompraHechoDto } from './dto/compraHecho.dto';
 
 @ApiTags('Compras')
 @ApiBearerAuth()
@@ -14,6 +15,13 @@ export class CompraController {
   @UseGuards(JwtAuthGuard)
   async create(@Request() req: any, @Body() dto: CompraDto) {
     const { id } = req.user;
+    return await this._compraService.create(id, dto);
+  }
+
+  @Post('hechas')
+  @UseGuards(JwtAuthGuard)
+  async createOne(@Request() req: any, @Body() dto: CompraHechoDto) {
+    const { id } = req.user;
     return await this._compraService.createOne(id, dto);
   }
 
@@ -22,6 +30,12 @@ export class CompraController {
   async getMany(@Request() req: any) {
     const { id } = req.user;
     return await this._compraService.getMany(id);
+  }
+
+  @Get('hechas')
+  @UseGuards(JwtAuthGuard)
+  async getManyHechas() {
+    return await this._compraService.getManyHechas();
   }
 
   @Get('solicitudes')

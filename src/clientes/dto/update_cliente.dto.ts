@@ -1,11 +1,15 @@
+import { IsString } from 'class-validator';
+
 export class UpdateClienteDto {
+  @IsString()
   nombre: string;
 
+  @IsString()
   apellido: string;
 
-  id_documento: number;
-
+  @IsString()
   documento: string;
 
+  @IsString()
   telefono: string;
 }

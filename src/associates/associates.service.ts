@@ -1,8 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { AsociadoRepository } from './associate.repository';
+import { Asociado } from './entities/associates.entity';
 import { CreateAsociadoDto } from './dto/create_asociado.dto';
-import { UpdateAsociadoDto } from './dto/update_asociado.dto';
+import { UpdateAsociadoDto, UpdateRolesDto } from './dto/update_asociado.dto';
 
 @Injectable()
 export class AssociatesService {
@@ -16,7 +17,7 @@ export class AssociatesService {
   }
 
   async getMany() {
-    return await this._asociadoRepository.find();
+    return await this._asociadoRepository.find({ relations: ['roles'] });
   }
 
   async createOne(dto: CreateAsociadoDto) {
@@ -35,6 +36,20 @@ export class AssociatesService {
     asociadoDB.telefono = dto.telefono;
     if (dto.contrasena) asociadoDB.contrasena = dto.contrasena;
     await this._asociadoRepository.update({ id_asociado }, asociadoDB);
+    return await this._asociadoRepository.findOne({ id_asociado });
+  }
+
+  async editRoles(id_asociado: string, dto: UpdateRolesDto) {
+    const asociadoDB = await this._asociadoRepository.findOne({ where: { id_asociado }, relations: ['roles'] });
+    if (!asociadoDB) {
+      throw new NotFoundException({ message: 'Asociado no encontrado' });
+    }
+    await this._asociadoRepository
+      .createQueryBuilder()
+      .relation(Asociado, 'roles')
+      .of(asociadoDB)
+      .addAndRemove(dto.roles, asociadoDB.roles);
+
     return await this._asociadoRepository.findOne({ id_asociado });
   }
 

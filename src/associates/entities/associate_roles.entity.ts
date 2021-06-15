@@ -10,5 +10,5 @@ export class Rol extends BaseEntity {
   nombre: string;
 
   @ManyToMany(() => Asociado, (asociado) => asociado.roles, { nullable: false })
-  asociados: Asociado[];
+  asociados?: Asociado[];
 }

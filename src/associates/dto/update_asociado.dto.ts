@@ -1,5 +1,5 @@
-import { IsString } from 'class-validator';
-
+import { IsArray, IsString } from 'class-validator';
+import { Rol } from '../entities/associate_roles.entity';
 export class UpdateAsociadoDto {
   @IsString()
   nombre: string;
@@ -15,4 +15,9 @@ export class UpdateAsociadoDto {
 
   @IsString()
   telefono: string;
+}
+
+export class UpdateRolesDto {
+  @IsArray()
+  roles: Rol[];
 }

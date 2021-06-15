@@ -5,7 +5,7 @@ import { AssociatesService } from './associates.service';
 import { AssociatesRequestService } from './associate_request.service';
 import { CreateAsociadoDto } from './dto/create_asociado.dto';
 import { CreateAsociadoRequestDto } from './dto/create_asociado_request.dto';
-import { UpdateAsociadoDto } from './dto/update_asociado.dto';
+import { UpdateAsociadoDto, UpdateRolesDto } from './dto/update_asociado.dto';
 import { UpdateAsociadoRequestDto } from './dto/update_asociado_request.dto';
 
 @ApiTags('Asociados')
@@ -18,7 +18,7 @@ export class AssociatesController {
   ) {}
 
   @Get('request/:id')
-  //@UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   async getOne(@Param('id') id: string) {
     return await this._associateRequestService.getOne(id);
   }
@@ -57,6 +57,12 @@ export class AssociatesController {
   @UseGuards(JwtAuthGuard)
   async updateOneRequest(@Param('id') id: string, @Body() dto: UpdateAsociadoRequestDto) {
     return await this._associateRequestService.editOne(id, dto);
+  }
+
+  @Put('roles/:id')
+  @UseGuards(JwtAuthGuard)
+  async updateRoles(@Param('id') id: string, @Body() dto: UpdateRolesDto) {
+    return await this._associateService.editRoles(id, dto);
   }
 
   @Post('request')

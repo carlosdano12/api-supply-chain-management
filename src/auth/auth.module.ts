@@ -10,7 +10,7 @@ import { AssociatesModule } from 'src/associates/associates.module';
   imports: [
     JwtModule.register({
       secret: constants.jwtSecret,
-      signOptions: { expiresIn: '40h' },
+      signOptions: { expiresIn: '1h' },
     }),
     AssociatesModule,
   ],

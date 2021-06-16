@@ -125,7 +125,7 @@ export class CompraService {
 
   async getMany(asociadoId: string) {
     const compras = await this._compraEncabezadoRepository.find({
-      where: { asociadoIdAsociado: asociadoId },
+      where: { asociadoIdAsociado: asociadoId, estado: 0 },
       relations: ['compraDetalles'],
     });
 

@@ -95,7 +95,7 @@ export class TransporteService {
 
   async getMany(asociadoId: string) {
     const transportes = await this._transporteRepository.find({
-      where: { asociadoIdAsociado: asociadoId },
+      where: { asociadoIdAsociado: asociadoId, estado: 0 },
       relations: ['transporteDetalles'],
     });
 
